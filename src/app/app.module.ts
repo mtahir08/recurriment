@@ -10,18 +10,18 @@ import { MaterialModule } from '@angular/material';
 import { AngularFireModule } from 'angularfire2';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+// import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { CompanyComponent } from './company/company.component';
 
 // Must export the config
 export const firebaseConfig = {
-  apiKey: 'AIzaSyDP0gAeDEmW5mk3SqgpESWm3Pg0g7CGWtw',
-  authDomain: 'recruitment-system-aa7a3.firebaseapp.com',
-  databaseURL: 'https://recruitment-system-aa7a3.firebaseio.com',
-  storageBucket: 'recruitment-system-aa7a3.appspot.com',
-  messagingSenderId: '85411421322'
+  apiKey: "AIzaSyDqoMjTfCG5yQKuUUZ9gKBlYSBqx_jvdh4",
+  authDomain: "recurriment-61bc5.firebaseapp.com",
+  databaseURL: "https://recurriment-61bc5.firebaseio.com",
+  storageBucket: "recurriment-61bc5.appspot.com",
+  messagingSenderId: "751772469433"
 };
 
 @NgModule({
@@ -29,7 +29,7 @@ export const firebaseConfig = {
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ForgotPasswordComponent,
+    // ForgotPasswordComponent,
     DashboardComponent,
     AdminComponent,
     CompanyComponent
