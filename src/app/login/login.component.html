@@ -12,7 +12,7 @@
         <md-card-content>
           <p>
             <md-input-container>
-              <input md-input placeholder="Enter your email" maxlength="25"  [(ngModel)]="email"
+              <input md-input placeholder="Enter your email" maxlength="25" name = "email" [(ngModel)]="email"
                      #emailCounter>
               <!--<md-hint align="end">{{emailCounter.value.length}} / 25</md-hint>-->
             </md-input-container>
@@ -20,7 +20,7 @@
           </p>
           <p>
             <md-input-container>
-              <input md-input type="password" placeholder="Enter your password" maxlength="25" [(ngModel)]="password"
+              <input md-input type="password" placeholder="Enter your password" maxlength="25" name = "password" [(ngModel)]="password"
                      #passwordCounter>
               <!--<md-hint align="end">{{passwordCounter.value.length}} / 100</md-hint>-->
             </md-input-container>
