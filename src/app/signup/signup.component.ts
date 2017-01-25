@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -7,17 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  //name:string;
-  //email:string;
-  //password:string;
-  selectedValue:string;
+  name: string;
+  email: string;
+  password: string;
+  selectedValue: string;
   types = [];
 
-  constructor() {
+  constructor(public fb: AngularFire) {
+    this.name = "";
+    this.email = "";
+    this.password = "";
     this.selectedValue = "";
     this.types = [
-      {value: 'company', viewValue: 'Company'},
-      {value: 'student', viewValue: 'Student'}
+      { value: 'company', viewValue: 'Company' },
+      { value: 'student', viewValue: 'Student' }
     ]
   }
 
@@ -25,6 +28,7 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
+    // this.fb.auth
     console.log("");
   }
 }
