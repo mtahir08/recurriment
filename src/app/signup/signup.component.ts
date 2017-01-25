@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 @Component({
   selector: 'app-signup',
@@ -12,8 +13,9 @@ export class SignupComponent implements OnInit {
   password: string;
   selectedValue: string;
   types = [];
+  roles = {};
 
-  constructor(public fb: AngularFire) {
+  constructor(public fb: AngularFire, private router: Router) {
     this.name = "";
     this.email = "";
     this.password = "";
@@ -22,6 +24,12 @@ export class SignupComponent implements OnInit {
       { value: 'company', viewValue: 'Company' },
       { value: 'student', viewValue: 'Student' }
     ]
+    this.roles = {
+			admin: 'admin',
+			company: 'company',
+			student: 'dashboard',
+		};
+
   }
 
   ngOnInit() { }
@@ -29,11 +37,11 @@ export class SignupComponent implements OnInit {
   signup() {
     let promise = this.fb.auth.createUser({ email: this.email, password: this.password });
     promise
-      .then(data => { console.log('signup success', data); this.login(data); })
+      .then(data => { console.log('signup success', data); this.loginUser(data); })
       .catch(err => console.log('signup error', err));
   }
 
-  login(signupData) {
+  loginUser(signupData) {
 
     let promise = this.fb.auth.login({ email: this.email, password: this.password },
       { provider: AuthProviders.Password, method: AuthMethods.Password });
@@ -47,18 +55,16 @@ export class SignupComponent implements OnInit {
     let obj = {
       name: this.name,
       email: this.email,
-      password: this.password,
       type: this.selectedValue,
       login: true,
-      createdAt: this.fb.database.ServerValue.TIMESTAMP,
-      updatedAt:this.fb.database.ServerValue.TIMESTAMP
+      // createdAt: this.fb.database.ServerValue.TIMESTAMP,
+      // updatedAt:this.fb.database.ServerValue.TIMESTAMP
     }
 
-    let promise = this.fb.database.object('/users');
-    promise.set(obj);
-    promise
-      .then(data => console.log('data saved', data))
+    let promise = this.fb.database.object('/users/' + signupData.uid);
+    promise.set(obj)
+      .then(data => {this.router.navigate(['/', this.roles[obj.type]])})
       .catch(err => console.log('data saving error', err));
   }
-  
+
 }
