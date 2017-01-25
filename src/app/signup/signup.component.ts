@@ -24,11 +24,19 @@ export class SignupComponent implements OnInit {
     ]
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   signup() {
-    // this.fb.auth
-    console.log("");
+    this.fb.auth.createUser({ email: this.email, password: this.password })
+    .then(data => {
+
+    })
+    .catch(error=>{
+      
+    });
   }
+
+
+
+
 }
