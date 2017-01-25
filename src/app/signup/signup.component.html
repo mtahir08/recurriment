@@ -1,4 +1,55 @@
-<p>
-  signup works!
-</p>
-<a [routerLink]="login">Login</a>
+<form class="example-form">
+  <md-grid-list cols="3">
+    <md-grid-tile></md-grid-tile>
+    <md-grid-tile>
+      <md-card class="example-card">
+        <md-card-header>
+          <div md-card-avatar class="example-header-image"></div>
+          <md-card-title>Sign Up</md-card-title>
+          <!--<md-card-subtitle>Dog Breed</md-card-subtitle>-->
+        </md-card-header>
+        <!--<img md-card-image src="assets/img/examples/shiba2.jpg">-->
+        <md-card-content>
+          <p>
+            <md-input-container>
+              <input md-input placeholder="Enter your name" maxlength="20" name="name" [(ngModel)]="name"
+                     #nameCounter>
+              <!--<md-hint align="end">{{nameCounter.value.length}} / 25</md-hint>-->
+            </md-input-container>
+
+          </p>
+          <p>
+            <md-input-container>
+              <input md-input placeholder="Enter your email" maxlength="25" name="email" [(ngModel)]="email"
+                     #emailCounter>
+              <!--<md-hint align="end">{{emailCounter.value.length}} / 25</md-hint>-->
+            </md-input-container>
+
+          </p>
+          <p>
+            <md-input-container>
+              <input md-input type="password" placeholder="Enter your password" maxlength="25" name="password"
+                     [(ngModel)]="password"
+                     #passwordCounter>
+              <!--<md-hint align="end">{{passwordCounter.value.length}} / 100</md-hint>-->
+            </md-input-container>
+          </p>
+        </md-card-content>
+        <md-card-actions>
+          <button md-raised-button (click)="login()">Login
+            <md-icon>check</md-icon>
+          </button>
+          <br>
+          <br>
+          <a md-raised-button routerLink="/signup">Create Account
+            <md-icon>check</md-icon>
+          </a> <a routerLink="/forgotPassword">Forgot Password</a>
+
+          <br>
+        </md-card-actions>
+      </md-card>
+    </md-grid-tile>
+    <md-grid-tile></md-grid-tile>
+  </md-grid-list>
+
+</form>
