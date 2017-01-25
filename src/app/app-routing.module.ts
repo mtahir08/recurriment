@@ -3,13 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
-const routes: Routes = [
+const routes:Routes = [
   {
     path: 'login', component: LoginComponent, children: []
   },
   {
     path: 'signup', component: SignupComponent, children: []
+  },
+  {
+    path: 'forgotPassword', component: ForgotPasswordComponent, children: []
   },
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
@@ -21,4 +25,5 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

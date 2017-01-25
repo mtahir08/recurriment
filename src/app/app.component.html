@@ -1,16 +1,15 @@
-<h1>
-  {{title}}
-</h1>
+<!--<button md-button routerLink="/login" routerLinkActive="active" color="primary">Login</button>-->
+<!--<button md-raised-button routerLink="/signup" routerLinkActive="active" color="primary">Signup</button>-->
+<!--<hr>-->
+<!--<a routerLink="/login" routerLinkActive="active">Login</a>-->
+<!--<a routerLink="/signup" routerLinkActive="active">Signup</a>-->
 
-<button md-button routerLink="/login" routerLinkActive="active" color="primary">Login</button>
-<button md-raised-button routerLink="/signup" routerLinkActive="active" color="primary">Signup</button>
-<hr>
-<a routerLink="/login" routerLinkActive="active">Login</a>
-<a routerLink="/signup" routerLinkActive="active">Signup</a>
-
-<ul>
-  <li class="text" *ngFor="let item of items$ | async">
-    {{item.$value}}
-  </li>
-</ul>
+<!--<ul>-->
+<!--<li class="text" *ngFor="let item of items$ | async">-->
+<!--{{item.$value}}-->
+<!--</li>-->
+<!--</ul>-->
+<md-toolbar color="primary">
+  <span>Recurriment App</span>
+</md-toolbar>
 <router-outlet></router-outlet>
