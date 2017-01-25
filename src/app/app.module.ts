@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdminComponent } from './admin/admin.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -28,7 +29,8 @@ export const firebaseConfig = {
     LoginComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    DashboardComponent
+    DashboardComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
