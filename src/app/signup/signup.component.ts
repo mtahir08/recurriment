@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  //name:string;
+  //email:string;
+  //password:string;
+  selectedValue:string;
+  types = [];
+
+  constructor() {
+    this.selectedValue = "";
+    this.types = [
+      {value: 'company', viewValue: 'Company'},
+      {value: 'student', viewValue: 'Student'}
+    ]
+  }
 
   ngOnInit() {
   }
 
+  signup() {
+    console.log("");
+  }
 }
