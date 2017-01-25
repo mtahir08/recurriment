@@ -36,11 +36,9 @@
           </p>
           <md-select placeholder="Select Account Type" [(ngModel)]="selectedValue" name="accountType">
             <md-option *ngFor="let type of types" [value]="type.value">
-              {{food.viewValue}}
+              {{type.viewValue}}
             </md-option>
           </md-select>
-
-          <p> Selected value: {{selectedValue}} </p>
         </md-card-content>
         <md-card-actions>
           <button md-raised-button (click)="signup()">Create My Account
