@@ -10,10 +10,12 @@ import { MaterialModule } from '@angular/material';
 import { AngularFireModule } from 'angularfire2';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-// import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { CompanyComponent } from './company/company.component';
+import { LoginGuardService } from './login-guard.service';
+import { AuthService } from './auth.service';
 
 // Must export the config
 export const firebaseConfig = {
@@ -29,7 +31,7 @@ export const firebaseConfig = {
     AppComponent,
     LoginComponent,
     SignupComponent,
-    // ForgotPasswordComponent,
+    ForgotPasswordComponent,
     DashboardComponent,
     AdminComponent,
     CompanyComponent
@@ -42,7 +44,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     MaterialModule.forRoot()
   ],
-  providers: [],
+  providers: [LoginGuardService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
