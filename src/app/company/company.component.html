@@ -5,13 +5,13 @@
   <span>Recurriment App</span>
 </md-toolbar>
 <md-sidenav-container class="example-container">
-  <md-sidenav #sidenav class="example-sidenav">
+  <md-sidenav #sidenav mode="push" class="example-sidenav">
     <md-card>
       <button md-button (click)="showStudents(sidenav)" style="width: 200px">Students</button>
 </md-card>
 <br>
 <md-card>
-  <button md-button (click)="sidenav.toggle()" style="width: 200px">Posted Jobs</button>
+  <button md-button (click)="showPostedJobs(sidenav)" style="width: 200px">Posted Jobs</button>
 </md-card>
 <br>
 <md-card>
@@ -34,6 +34,21 @@
     <h4 md-line>{{student.name}}</h4>
     <p md-line> {{student.email}} </p>
     <p md-line> {{student.updatedAt | date}} </p>
+    <md-divider></md-divider>
+  </md-list-item>
+</md-list>
+
+<md-list *ngIf="jobs.length">
+  <h3 md-subheader>Posted Jobs</h3>
+  <md-list-item *ngFor="let job of jobs">
+    <md-icon md-list-avatar>note</md-icon>
+    <button md-fab>
+      <md-icon >remove_red_eye</md-icon>
+    </button>
+    <!--<i class="material-icons">edit</i>-->
+    <h4 md-line>{{job.title}}</h4>
+    <p md-line> {{job.description}} </p>
+    <p md-line> {{job.postedAt | date}} </p>
     <md-divider></md-divider>
   </md-list-item>
 </md-list>
