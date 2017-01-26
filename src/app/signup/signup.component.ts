@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
+import * as firebase from 'firebase';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -25,10 +27,10 @@ export class SignupComponent implements OnInit {
       { value: 'student', viewValue: 'Student' }
     ]
     this.roles = {
-			admin: 'admin',
-			company: 'company',
-			student: 'dashboard',
-		};
+      admin: 'admin',
+      company: 'company',
+      student: 'dashboard',
+    };
 
   }
 
@@ -56,14 +58,14 @@ export class SignupComponent implements OnInit {
       name: this.name,
       email: this.email,
       type: this.selectedValue,
-      login: true,
-      // createdAt: this.fb.database.ServerValue.TIMESTAMP,
-      // updatedAt:this.fb.database.ServerValue.TIMESTAMP
+      isLogin: true,
+      updatedAt: firebase.database.ServerValue.TIMESTAMP,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
     }
 
     let promise = this.fb.database.object('/users/' + signupData.uid);
     promise.set(obj)
-      .then(data => {this.router.navigate(['/', this.roles[obj.type]])})
+      .then(data => { this.router.navigate(['/', this.roles[obj.type]]) })
       .catch(err => console.log('data saving error', err));
   }
 
