@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 
 @Component({
   selector: 'app-company',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyComponent implements OnInit {
 
-  constructor() { }
+students;
+// sidenav.toggle()
+  constructor(public fb: AngularFire) {
+    this.students = [];
+   }
 
   ngOnInit() {
   }
 
+  showStudents(sidenav: any) {
+    let jobs = this.fb.database.list('/users', {
+      query: {
+        orderByChild: 'type',
+        equalTo: 'student'
+      }
+    }).subscribe(data => {
+      console.log(data);
+      this.students = data;
+      sidenav.toggle();
+    });
+
+  }
 }
