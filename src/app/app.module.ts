@@ -16,6 +16,10 @@ import { AdminComponent } from './admin/admin.component';
 import { CompanyComponent } from './company/company.component';
 import { LoginGuardService } from './login-guard.service';
 import { AuthService } from './auth.service';
+import { LeftSideNavComponent } from './components/left-side-nav/left-side-nav.component';
+import { GetDataService } from './services/get-data.service';
+import { RightSideNavComponent } from './components/right-side-nav/right-side-nav.component';
+import { DashboardSideNavComponent } from './components/dashboard-side-nav/dashboard-side-nav.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -34,7 +38,10 @@ export const firebaseConfig = {
     ForgotPasswordComponent,
     DashboardComponent,
     AdminComponent,
-    CompanyComponent
+    CompanyComponent,
+    LeftSideNavComponent,
+    RightSideNavComponent,
+    DashboardSideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     MaterialModule.forRoot()
   ],
-  providers: [LoginGuardService, AuthService],
+  providers: [LoginGuardService, AuthService, GetDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
