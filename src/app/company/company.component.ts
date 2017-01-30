@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 
-import { AuthService } from '../auth.service';
+
+import { GetDataService } from '../services/get-data.service';
+import { LeftSideNavComponent } from '../components/left-side-nav/left-side-nav.component';
+
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
@@ -10,51 +12,62 @@ import { AuthService } from '../auth.service';
 })
 export class CompanyComponent implements OnInit {
 
-  students;
-  jobs;
-  // sidenav.toggle()
-  constructor(public fb: AngularFire, private router: Router, private authService: AuthService) {
-    this.students = [];
-    this.jobs = [];
+  students$: FirebaseListObservable<any>;
+  jobs$: FirebaseListObservable<any>;
+  jobs: boolean;
+  students: boolean;
+  sideNave: boolean;
+  rightNave: boolean;
+  sendData: Object;
+  constructor(public fb: AngularFire, private getDataService: GetDataService) {
+    this.sideNave = false;
+    this.rightNave = false;
+    this.students = false;
+    this.jobs = false;
+    this.sendData = {
+      rightNav: false,
+      data: {}
+    };
   }
 
   ngOnInit() {
   }
 
-  showStudents(sidenav: any) {
-    this.jobs.length = 0;
-    let jobs = this.fb.database.list('/users', {
-      query: {
-        orderByChild: 'type',
-        equalTo: 'student'
-      }
-    }).subscribe(data => {
-      console.log(data);
-      this.students = data;
-      sidenav.toggle();
-    });
+  showLeftSideBar() {
+    this.sideNave = !this.sideNave;
+  }
+
+  showRightSideBar(student: any) {
+    this.sendData = {
+      rightNav: true,
+      data: student
+    };
+    this.rightNave = !this.rightNave;
 
   }
 
-  showPostedJobs(sidenav: any) {
-    this.students.length = 0;
-    let currentUser = this.authService.getUserData();
-    console.log(currentUser['uid']);
-    let jobs = this.fb.database.list('/jobs', {
-      query: {
-        orderByChild: 'companyId',
-        equalTo: currentUser['uid']
-      }
-    }).subscribe(data => {
-      console.log(data);
-      this.jobs = data;
-      sidenav.toggle();
-    });
+  checkType(event): void {
+    console.log(event);
+    this.sideNave = !this.sideNave;
+    (event.students) ? this.showStudents() : this.showPostedJobs();
   }
 
-   signout() {
-    this.authService.doUnsubscribe();
-
-    this.router.navigate(['/login'])
+  showStudents() {
+    this.jobs = false;
+    this.students$ = this.getDataService.getStudentsData();
+    this.students = true;
   }
+
+  showPostedJobs() {
+    this.students = false;
+    this.jobs$ = this.getDataService.getJobsData();
+    this.jobs = true;
+  }
+
+
+  closedfn(event) {
+    console.log("event", event);
+    this.rightNave = !this.rightNave;
+  }
+
 }
