@@ -1,0 +1,18 @@
+<md-sidenav #rightnav align="end" class="right-nav">
+  <table>
+    <tr>
+      <th>Name/Title</th>
+      <td>{{record.name || record.title}}</td>
+    </tr>
+    <tr>
+      <th>Email/Description</th>
+      <td>{{record.email || record.description}}</td>
+    </tr>
+    <tr>
+      <th>Updated At/Posted At</th>
+      <td>{{record.updatedAt || record.postedAt | date:'medium'}}</td>
+    </tr>
+  </table>
+
+  <button md-button (click)="closedRightNav(rightnav)">Close</button>
+</md-sidenav>
