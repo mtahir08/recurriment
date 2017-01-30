@@ -3,17 +3,15 @@ import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 
 
 @Injectable()
 export class AuthService {
-  userData: Object;
-  user: Boolean;
+  students$: FirebaseListObservable<any>;
+  userData: FirebaseListObservable<any>;
+  user: Object;
   userDetail$;
   constructor(public af: AngularFire) {
     let state = this.af.auth.subscribe(data => {
       if (data) {
         this.setUser(data);
-        let userDetail = this.af.database.object('/users/' + data.uid, { preserveSnapshot: true });
-        this.userDetail$ = userDetail.subscribe(snapshot => {
-          this.userData = snapshot.val();
-        });
+        this.getUserDetail(data.uid);
       } else {
         this.setUser(null);
         this.userDetail$
@@ -23,23 +21,34 @@ export class AuthService {
     });
   }
 
+  getUserDetail(uid): any {
+    let userDetail = this.af.database.object('/users/' + uid, { preserveSnapshot: true });
+    return new Promise((resolve, reject) => {
+      this.userDetail$ = userDetail.subscribe(snapshot => {
+        this.userData = snapshot.val();
+        resolve(this.userData)
+      });
+    })
+  }
   setUser(user) {
     this.user = user
   }
 
-  getUser() {
+  getUser(): any {
     console.log(this.user);
-    if (this.user) return true;
+    if (this.user) return this.user;
     else return false;
   }
 
-  getUserData() {
-    return this.userData;
+  getUserData(): any {
+    if (!this.userData) { return this.getUserDetail(this.user['uid']) }
+    else return this.userData;
+
   }
 
   doUnsubscribe() {
     console.log("on unsubscribe", this.userDetail$);
     if (this.userDetail$) this.userDetail$.unsubscribe();
-        this.af.auth.logout();
+    this.af.auth.logout();
   }
 }
