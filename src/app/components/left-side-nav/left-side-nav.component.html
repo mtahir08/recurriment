@@ -1,0 +1,17 @@
+<md-sidenav #sidenav class="example-sidenav">
+  <md-card>
+    <button md-button (click)="showStudents(sidenav)" class="btn-width">Students</button>
+  </md-card>
+  <br>
+  <md-card>
+    <button md-button (click)="showPostedJobs(sidenav)" class="btn-width">Posted Jobs</button>
+  </md-card>
+  <br>
+  <md-card>
+    <button md-button (click)="sidenav.toggle()" class="btn-width">Settings</button>
+  </md-card>
+  <br>
+  <md-card>
+    <button md-button (click)="signout()" class="btn-width">Logout</button>
+  </md-card>
+</md-sidenav>
